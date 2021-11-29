@@ -29,7 +29,8 @@ mkdir ./labeling/heatmap_fusion/model
 and place ```resnet18_model_latest.pth.tar``` into the ```natural-surveillance/labeling/heatmap_fusion/model``` directory.
 
 ### 3. Google Cloud API key
-Obtain a API key for the Google Street View Static API and add it to ```.secrets.yaml``` 
+Obtain a API key for the Google Street View Static API and add it to ```.secrets.yaml```. 
+To not overshoot available credit, enter your credit in dollar in ```data/gsv_budget.txt```
 
 ## Dataset
 ![dataset](https://github.com/timovanasten/natural-surveillance/blob/doc/doc/img/neighborhood-level.png?raw=true)
@@ -46,5 +47,3 @@ For any questions, feel free to contact me on timovanasten@gmail.com.
 ![opening-localization](https://github.com/timovanasten/natural-surveillance/blob/doc/doc/img/opening-localization-overview.png?raw=true)
 ![opening-detection](https://github.com/timovanasten/natural-surveillance/blob/doc/doc/img/opening-detection.png?raw=true)
 ![localization-output](https://github.com/timovanasten/natural-surveillance/blob/doc/doc/img/localization-output.png?raw=true)
-![road-surveillability](https://github.com/timovanasten/natural-surveillance/blob/doc/doc/img/road-surveillability.png?raw=true)
-![occupant-surveillability](https://github.com/timovanasten/natural-surveillance/blob/doc/doc/img/occupant-surveillability.png?raw=true)
