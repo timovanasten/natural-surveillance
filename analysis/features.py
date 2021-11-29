@@ -220,5 +220,5 @@ class Features:
         save_path_neighborhood = Path(self.save_dir, settings.features.NEIGHBORHOOD_FEATURES_FILENAME)
         log.info("Saved street level features to %s", save_path_street_segments)
         log.info("Saved neighborhood level features to %s", save_path_neighborhood)
-        self.street_segment_features_gdf.to_csv(save_path_street_segments)
-        self.neighborhood_features_gdf.to_csv(save_path_neighborhood)
+        self.street_segment_features_gdf.to_csv(save_path_street_segments, index=False)
+        self.neighborhood_features_gdf.to_csv(save_path_neighborhood, index=False)
