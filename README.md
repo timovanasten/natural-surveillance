@@ -1,6 +1,8 @@
 # Measuring Natural Surveillance at Scale: An Automated Methodology for Investigating the Relation Between the "Eyes on the Street" and Urban Safety
 This repository contains the code belonging to my master thesis: [_Measuring Natural Surveillance at Scale: An Automated Methodology for Investigating the Relation Between the "Eyes on the Street" and Urban Safety_]().
 
+![front-cover](https://github.com/timovanasten/natural-surveillance/blob/doc/doc/img/front-cover.png?raw=true)
+
 ##Abstract
 To create safe urban areas, it is important to gain insight into what influences the (perceived) safety of our cities and human settlements. One of the factors that can contribute to safety is the way urban spaces are designed. Previous work has highlighted the importance of _natural surveillance_: a type of surveillance that is a byproduct of how citizens normally and routinely use the environment. However, studying this concept is not a trivial task. Manual approaches such as observation studies are costly and time-consuming and have therefore often limited themselves to smaller geographical areas. 
 
