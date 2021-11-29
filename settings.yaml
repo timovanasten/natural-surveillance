@@ -1,0 +1,69 @@
+---
+json_indent: null  # Set to 4 to save as human-readable format, null for compressed
+output_dir: 'data/results'
+logging_dir: 'data/logs'
+log_to_file: True
+
+# Pipeline settings
+pipeline:
+  config_filename: 'config.json'
+  state_filename: 'pipeline_state.pkl'
+
+neigborhoods:
+  cbs_shapefile_path: 'data/neighborhoods/cbs/wijken.shp'
+  amsterdam_safety_index_geojson_path: 'data/neighborhoods/amsterdam/safety_index_geometry.geojson'
+
+# OpenStreetMap settings
+osm:
+  download_timeout: 1200  # Maximum time it can take to for a OpenStreetMap download to complete before timing out
+  sub_dir: 'osm/'
+  building_gdf_filename: 'building_gdf.pkl' # Pickle file containing the GeoDataFrame with building footprints
+  street_gdf_filename: 'street_network_gdf.pkl' # Pickle file containing the GeoDataFrame with the street network
+  json_filename: 'buildings.json.gz' # Processed output for the geo-localization algorithm
+  building_buffer: 70 # Buffer around the target area in meters to also retrieve buildings for
+  show_plots: False # If set to true, plots with the building footprints and street network will be displayed after data collection.
+
+# Google Street View Settings
+gsv:
+  query_json_filename: 'queries.json.gz'
+  meta_json_filename: 'meta.json.gz'
+  sub_dir: 'gsv/'
+  image_dir: 'images/'
+  budget_file: 'data/gsv_budget.txt'
+  dollar_price_per_image: 0.007
+  default_budget_dollar: 200
+
+# Facade labeling settings
+labeling:
+  # Batch size for the number of images loaded into memory at once. Used to prevent out of memory errors
+  batch_size: 300
+  json_filename: 'detected_openings.json.gz'
+  sub_dir: 'labeling/'
+  # Name of the directory within the output directory in which the visualizations of the detected windows are stored.
+  visualization_dir: 'visualization/'
+  model_config_path: 'labeling/heatmap_fusion/experiments/resnet/lr1e-3_x120-90-110_center_b2.yaml'
+  trained_model_path: 'labeling/heatmap_fusion/model/resnet18_model_latest.pth.tar'
+  output_visualizations: True
+
+# Window localization settings
+localization:
+  json_filename: 'opening_locations.json.gz'
+  csv_filename: 'opening_locations.csv'
+  sub_dir: 'localization/'
+  # Number of meters above which localization results will be discarded
+  default_filter_altitude: 10
+  # Height of the Google Street view camera im meters
+  gsv_camera_height: 2.5
+
+sightlines:
+  sub_dir: 'sightlines/'
+  gdf_filename: 'sightline_gdf.pkl'
+  csv_filename: 'sightlines.csv'
+  # Local CRS of the studied area, used for calculating the sightlines. More local CRSs will lead to smaller errors in
+  # e.g. sightline distance.
+  local_crs_epsg: 28992
+
+features:
+  street_features_filename: 'street_level_features.csv'
+  neighborhood_features_filename: 'neighborhood_level_features.csv'
+  sub_dir: 'features/'
