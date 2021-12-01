@@ -18,3 +18,5 @@ overpass~=0.7
 swifter~=1.0.9
 tqdm~=4.62.0
 networkx~=2.5.1
+plotly~=5.4.0
+statsmodels~=0.13.1

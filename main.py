@@ -81,6 +81,7 @@ if __name__ == '__main__':
     handlers = [logging.StreamHandler()]
     if settings.LOG_TO_FILE:
         log_path = Path(settings.LOGGING_DIR, str(datetime.now()) + '.log')
+        log_path.parent.mkdir(parents=True, exist_ok=True)
         handlers.append(logging.FileHandler(log_path))
     logging.basicConfig(format='%(levelname)s - %(module)s: %(message)s',
                         level=logging.INFO,

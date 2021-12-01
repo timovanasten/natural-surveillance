@@ -8,10 +8,8 @@ from scipy.stats import pearsonr
 import numpy as np
 from itertools import product
 from geopandas import GeoDataFrame
-import pandas_bokeh
 import plotly.express as px
 import plotly.subplots as sp
-pandas_bokeh.output_file('./plots/plot.html')
 log = logging.getLogger(__name__)
 
 
