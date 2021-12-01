@@ -59,8 +59,8 @@ To create a nice visualization of the dataset, such as the one above, check out 
 A dataset containing the estimated geolocation of 872 360 building openings is also available. Please contact me for access.
 
 ## Running the Code
-The code that was ran for the experiment outlined in the thesis document can be found in ```main.py```.
-To obtain your own data, create a ```Pipeline``` object using either a polygon, address or neighborhood name*:
+The code that was ran for the experiment outlined in the thesis document can be found in ```main.py```. 
+To obtain your own data, update the EPSG of the local coordinate reference system in `settings.yaml` to one of the area of interest and create a ```Pipeline``` object using either a polygon, address or neighborhood name*:
 
 ```python
 from shapely.geometry import Polygon
