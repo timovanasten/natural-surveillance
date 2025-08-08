@@ -1,6 +1,8 @@
 # “Eyes on the Street”: Estimating Natural Surveillance Along Amsterdam’s City Streets Using Street-Level Imagery
 Related research: https://link-springer-com.tudelft.idm.oclc.org/chapter/10.1007/978-3-031-31746-0_12
 
+![front-cover](https://github.com/timovanasten/natural-surveillance/blob/main/doc/img/front-cover.png?raw=true)
+
 ## Abstract
 Neighborhood safety and its perception are important determinants of citizens’ health and well-being. Contemporary urban design guidelines often advocate urban forms that encourage natural surveillance or “eyes on the street” to promote community safety. However, assessing a neighborhood’s level of natural surveillance is challenging due to its subjective nature and a lack of relevant data. We propose a method for measuring natural surveillance at scale by employing a combination of street-level imagery and computer vision techniques. We detect windows on building facades and calculate sightlines from the street level and surrounding buildings across forty neighborhoods in Amsterdam, the Netherlands. By correlating our measurements with the city’s Safety Index, we also validate how our method can be used as an estimator of neighborhood safety. We show how perceived safety varies with window level and building distance from the street, and we find a non-linear relationship between natural surveillance and (perceived) safety.
 
