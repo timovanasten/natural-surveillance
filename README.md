@@ -1,7 +1,7 @@
 # “Eyes on the Street”: Estimating Natural Surveillance Along Amsterdam’s City Streets Using Street-Level Imagery
-This code belongs to the paper “Eyes on the Street”: Estimating Natural Surveillance Along Amsterdam’s City Streets Using Street-Level Imagery which is available [here](https://pure.tudelft.nl/ws/portalfiles/portal/153790052/978_3_031_31746_0_12.pdf).
+This code belongs to the paper “Eyes on the Street”: Estimating Natural Surveillance Along Amsterdam’s City Streets Using Street-Level Imagery, available [here](https://pure.tudelft.nl/ws/portalfiles/portal/153790052/978_3_031_31746_0_12.pdf).
 
-For a more expansive document on the research and code, see this document: [_Measuring Natural Surveillance at Scale: An Automated Methodology for Investigating the Relation Between the "Eyes on the Street" and Urban Safety_](https://github.com/timovanasten/natural-surveillance/blob/main/doc/Measuring%20Natural%20Surveillance%20at%20Scale.pdf).
+For a more expansive document on the research and code, see [this document](https://github.com/timovanasten/natural-surveillance/blob/main/doc/Measuring%20Natural%20Surveillance%20at%20Scale.pdf).
 
 ![front-cover](https://github.com/timovanasten/natural-surveillance/blob/main/doc/img/front-cover.png?raw=true)
 
