@@ -73,10 +73,9 @@ def main():
 
 
 if __name__ == '__main__':
-    # TODO: Check if I can reset the index of sightline gdf to improve performance
     # Silence the warning from swifter: This pandas object has duplicate indices, and swifter may not
     # be able to improve performance. Consider resetting the indices with `df.reset_index(drop=True)`.
-    warnings.filterwarnings('ignore', "/duplicate indices/")
+    warnings.filterwarnings("ignore", message="This pandas object has duplicate indices", module="swifter")
     # For more log options see https://docs.python.org/3/library/logging.html#logrecord-attributes
     handlers = [logging.StreamHandler()]
     if settings.LOG_TO_FILE:
