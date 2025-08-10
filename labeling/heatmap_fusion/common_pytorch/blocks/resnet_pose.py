@@ -3,7 +3,14 @@ from easydict import EasyDict as edict
 
 import torch
 import torch.utils.model_zoo as model_zoo
-from torchvision.models.resnet import model_urls
+from torchvision.models import ResNet18_Weights, ResNet34_Weights, ResNet50_Weights, ResNet101_Weights, ResNet152_Weights
+model_urls = {
+    'resnet18': ResNet18_Weights.IMAGENET1K_V1.url,
+    'resnet34': ResNet34_Weights.IMAGENET1K_V1.url,
+    'resnet50': ResNet50_Weights.IMAGENET1K_V1.url,
+    'resnet101': ResNet101_Weights.IMAGENET1K_V1.url,
+    'resnet152': ResNet152_Weights.IMAGENET1K_V1.url,
+}
 
 from ..base_modules.deconv_head import DeconvHead
 from ..base_modules.resnet import resnet_spec, ResnetBackbone

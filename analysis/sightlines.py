@@ -161,7 +161,7 @@ class Sightlines(PickledDataFrame):
         """
         log.info("Computing all possible sightlines within a maximum of %s meters...", max_distance)
         radius_polygons = GeoDataFrame(geometry=opening_gdf.buffer(max_distance))
-        sightline_gdf = geopandas.sjoin(opening_gdf, radius_polygons, how='left', op='within')
+        sightline_gdf = geopandas.sjoin(opening_gdf, radius_polygons, how='left', predicate='within')
 
         sightline_gdf = sightline_gdf.merge(
             opening_gdf[['opening_location', 'altitude']],
@@ -241,13 +241,14 @@ class Sightlines(PickledDataFrame):
         """
         log.info("Removing sightlines that are blocked by buildings")
         # Generate spacial index for the buildings
-        spacial_index = buildings.sindex
+        spatial_index = buildings.sindex
 
         # Define function for to apply to each row
         def sightline_obstructed(row):
             sightline: LineString = row['sightline']
-            intersects_building = spacial_index.query_bulk([sightline], 'intersects')[0].size > 0
-            return True if intersects_building else False
+            intersecting_indices = spatial_index.query(sightline, predicate='intersects')
+            intersects_building = len(list(intersecting_indices)) > 0
+            return intersects_building
 
         # Silence false positive warning on chained assignment using pandas context manager
         with geopandas.pd.option_context('mode.chained_assignment', None):

@@ -18,7 +18,7 @@ from .evaluation import getAp
 num_corners = 4
 max_num_windows = 100
 point = namedtuple('point', ['x', 'y'])
-flip_pairs = np.array([[0, 3], [1, 2]], dtype=np.int)
+flip_pairs = np.array([[0, 3], [1, 2]], dtype=int)
 
 
 # For data parsing
@@ -70,7 +70,7 @@ class Facade(IMDB):
         if 'XML' in self.benchmark_name:
             self.use_xml = True
 
-        self.flip_pairs = np.array([[0, 3], [1, 2]], dtype=np.int)
+        self.flip_pairs = np.array([[0, 3], [1, 2]], dtype=int)
 
     def parse_json_annotation(self, annotation_path, im_path, shape):
         window_list = list()
@@ -192,7 +192,7 @@ class Facade(IMDB):
         gt_db = list()
         for n_img in range(len(img_list)):
             image_path = img_list[n_img]
-            the_sample_window = np.array(window_anno_list[n_img], dtype=np.float)
+            the_sample_window = np.array(window_anno_list[n_img], dtype=float)
             im_height, im_width, _ = shape_list[n_img]
 
             if len(the_sample_window) > max_num_windows: #exclude windows whose num exceeds max_num_windows

@@ -2,7 +2,7 @@ from __future__ import annotations
 import requests
 from util.coordinates import Coordinates
 from util.serialization import Collection
-from typing import List, Optional
+from typing import List, Optional, Tuple
 from config import settings
 from pathlib import Path
 from datasources.osm import StreetNetwork
@@ -19,7 +19,7 @@ class GSVImageMeta:
                  heading: int, pitch: int, fov: int,
                  height: int, width: int,
                  date: str,
-                 street_gdf_index: Optional[tuple],
+                 street_gdf_index: Optional[Tuple[int, int, int]],
                  street_segment_index: Optional[int]):
         self.filename = filename
         self.panorama_id = panorama_id
@@ -223,7 +223,7 @@ class GSVRequest:
                  heading: int,
                  fov: int = 90,
                  pitch: int = 0,
-                 street_gdf_index: Optional[tuple] = None,
+                 street_gdf_index: Optional[Tuple[int, int, int]] = None,
                  street_segment_index: Optional[int] = None):
         """
         Create a GSVRequest object with the required parameters to request a Google Street View image

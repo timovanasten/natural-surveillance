@@ -86,7 +86,7 @@ def generate_gaussian_heatmap_label(feat_stride, patch_width, patch_height, wind
     hm_height = patch_height // feat_stride
 
     # init heatmap as all zeros
-    label = np.zeros((num_type_points, hm_height, hm_width), dtype=np.float)
+    label = np.zeros((num_type_points, hm_height, hm_width), dtype=float)
 
     # gaussian radius
     tmp_size = sigma * bound

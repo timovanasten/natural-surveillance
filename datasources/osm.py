@@ -20,8 +20,8 @@ log = logging.getLogger(__name__)
 api = overpass.API()
 
 # Set download timeout and cache settings
-nx.config(timeout=settings.osm.DOWNLOAD_TIMEOUT)
-nx.config(use_cache=False)
+nx.settings.timeout = settings.osm.DOWNLOAD_TIMEOUT
+nx.settings.use_cache = False
 
 
 class BuildingFootprints(PickledDataFrame):
@@ -56,7 +56,7 @@ class BuildingFootprints(PickledDataFrame):
         :return: Reference to this BuildingFootprints object with its building_gdf attribute populated
         """
         log.info("Retrieving building footprints from OpenStreetMap...")
-        dataframe = osmnx.geometries_from_address(address, {"building": True}, distance_around_address)
+        dataframe = nx.features_from_address(address, {"building": True}, dist=distance_around_address)
         # Only keep building geometry
         self.building_gdf = dataframe[['geometry']]
         return self
@@ -73,7 +73,7 @@ class BuildingFootprints(PickledDataFrame):
         log.info("Retrieving building footprints from OpenStreetMap...")
         METERS_PER_DEGREE = 111300.
         polygon = polygon.buffer(buffer/METERS_PER_DEGREE)
-        dataframe = osmnx.geometries_from_polygon(polygon, {"building": True})
+        dataframe = nx.features_from_polygon(polygon, {"building": True})
         # Only keep building geometry
         self.building_gdf = dataframe[['geometry']]
         return self
@@ -162,11 +162,8 @@ class StreetNetwork(PickledDataFrame):
         """Calculates additional properties of the street network and returns a GeoDataFrame of the street network
         with columns containing those properties.
         These properties will later be used to generate Google Street View API queries"""
-        # Make the street network graph undirected, since we don't care about traffic flow
-        street_network = nx.get_undirected(street_network)
-        # Add bearing data to the street network
-        street_graph_with_bearings = nx.add_edge_bearings(street_network)
-        # Convert graph to GeoDataFrame
+        # Add bearing data to the street network and make the street network graph undirected, since we don't care about traffic flow
+        street_graph_with_bearings = nx.add_edge_bearings(street_network).to_undirected()
         network_gdf = nx.graph_to_gdfs(street_graph_with_bearings, nodes=False, edges=True)
         network_gdf['sample_points'] = network_gdf.apply(self._calc_sample_points, axis=1)
         network_gdf['street_segments'] = network_gdf.apply(self._split_street_segments, axis=1)
@@ -205,7 +202,8 @@ class StreetNetwork(PickledDataFrame):
         Show a plot with the sampled points along the street network.
         :return: None
         """
-        self.street_network_gdf.set_geometry('sample_points').plot(markersize=0.1)
+        self.street_network_gdf.set_geometry('sample_points')
+        self.street_network_gdf.plot()
         plt.show()
 
     def save(self) -> None:
@@ -257,8 +255,8 @@ class StreetNetwork(PickledDataFrame):
         street_segments = row.street_segments
         sample_points = row.sample_points
         segment_bearing_pairs = []
-        for point in sample_points:
-            for i, street_segment in enumerate(street_segments):
+        for point in sample_points.geoms:
+            for i, street_segment in enumerate(street_segments.geoms):
                 # Check on which street segment this sample point lies
                 if street_segment.distance(point) < 1e-8:  # basically == 0 but calculation has floating point error
                     segment_bearing_pairs.append((point, row.bearings[i]))
@@ -282,7 +280,7 @@ class StreetNetwork(PickledDataFrame):
             # in the splitting function
             max_tolerance = 1e-8
             street_segments = street_segments.simplify(max_tolerance)
-            return MultiLineString(lines=list(street_segments))
+            return MultiLineString(lines=street_segments.geoms)
 
     @staticmethod
     def _calculate_segment_bearings(row, precision=1) -> List[int]:
@@ -294,7 +292,7 @@ class StreetNetwork(PickledDataFrame):
         """
         street_segments = row.street_segments
         bearings = []
-        for segment in street_segments:
+        for segment in street_segments.geoms:
             coords = segment.coords
             # Assert that the street segments are all LineStrings consisting of two points
             assert len(coords) == 2, "Segment has more than 2 points, making this bearing invalid"
